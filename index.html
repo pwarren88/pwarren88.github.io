@@ -37,17 +37,40 @@
 
   <style>
     #map {
-      height: 600px;
+      height: 75vh;
       width: 100%;
     }
-    
-    #yellowstoneMap {
+
+    #content {
       width: 100%;
+    }
+
+    #yellowstoneMap {
+      width: 50%;
       height: 100%;
     }
-    
+
     #firstHeading {
       color: black;
+    }
+
+    @media screen and (max-width: 600px) {
+      #map {
+        display: none;
+      }
+      #mapTitle {
+        display: none;
+      }
+    }
+
+    @media screen and (min-width: 601px) {
+      #galleryTitle {
+        display: none
+      }
+
+      #galleryImages {
+        display: none;
+      }
     }
   </style>
 
@@ -70,10 +93,10 @@
             <a class="nav-link js-scroll-trigger" href="#about">About</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#education">Education</a>
+            <a class="nav-link js-scroll-trigger" href="#education">Education & Skills</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#portfolio">Gallery</a>
+            <a class="nav-link js-scroll-trigger" href="#gallery">Photo Gallery</a>
           </li>
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
@@ -116,10 +139,12 @@
             In my quest to start my career in development, I attended a full-time programming boot-camp at Coding Temple, a private organization
             located in Chicago aimed at teaching Full-Stack Development in the .Net Framework and other related technologies.
             Upon completion, I gained professional experience working on short software sprint building an application using
-            the .NET framework, SQL Server, and AngularJS. I'm excited continue developing my skills and to find opportunities that will help me expand my knowledge!
+            the .NET framework, SQL Server, and AngularJS. I'm excited continue developing my skills and to find opportunities
+            that will help me expand my knowledge!
           </p>
           <p>
-            Some of my hobbies include playing basketball, reading, traveling, and photography. Check out a few of my pictures <a class="js-scroll-trigger" href="#portfolio">below</a>!
+            Some of my hobbies include playing basketball, reading, traveling, and photography. Check out a few of my pictures
+            <a class="js-scroll-trigger" href="#portfolio">below</a>!
           </p>
         </div>
       </div>
@@ -129,7 +154,7 @@
   <!-- Education Section -->
   <section id="education" class="content-section text-center">
     <div class="container">
-      <h2>Education & Skills</h2>
+      <h2>Education</h2>
       <div class="row">
         <div class="col-sm">
           <h3>Florida State University</h3>
@@ -147,6 +172,7 @@
             needed to enter the Web Development job market.</div>
         </div>
       </div>
+      <h2>Languages & Technologies</h2>
       <div class="row">
         <div class="col-lg-8 mx-auto">
           <ul class="list-inline list-icons">
@@ -183,14 +209,28 @@
           </ul>
         </div>
       </div>
+      <h2>Check Out Some of My Work</h2>
+      <div class="row">
+        <div class="col-sm-6">
+          <a href="http://rebekahlampman.com" target="_blank">
+            <img src="img\rl-screenshot.png" class="img-fluid" />
+          </a>
+        </div>
+        <div class="col-sm-6">
+          <a href="https://github.com/pwarren88" target="_blank">
+            <img src="img\github-screenshot.png" class="img-fluid" />
+          </a>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- Gallery Section -->
-  <section id="portfolio" class="content-section text-center p-0">
+  <section id="gallery" class="content-section text-center p-0">
     <div class="container-fluid p-0">
-      <h2>Gallery</h2>
-      <div class="row no-gutters popup-gallery">
+      <p>A different style gallery can be viewed by changing the screen size.</p>
+      <h2 id="galleryTitle">Check Out Some of My Pictures</h2>
+      <div id="galleryImages" class="row no-gutters popup-gallery">
         <div class="col-lg-4 col-sm-6">
           <a class="portfolio-box" href="img/IMG_0070.jpg">
             <img class="img-fluid" src="img/IMG_0070.jpg" alt="">
@@ -282,8 +322,10 @@
           </a>
         </div>
       </div>
-      <h2>Map Gallery</h2>
-      <div id="map"></div>
+      <h2 id="mapTitle">Pictures of Some of My Travels</h2>
+      <div class="col-sm-12">
+        <div id="map"></div>
+      </div>
     </div>
   </section>
 
@@ -343,7 +385,7 @@
   <!-- Custom scripts for this template -->
   <script src="js/grayscale.js"></script>
   <!-- Custom scripts for this template -->
-  <!--<script src="js/creative.js"></script>-->
+  <!-- <script src="js/creative.js"></script> -->
 
   <!-- Ekko Lightbox JS | http://ashleydw.github.io/lightbox/#image-gallery -->
   <script>
@@ -370,35 +412,50 @@
 
   <script>
     function initMap() {
-      var chicago = { lat: 41.87, lng: -87.6298 };
-      var yellowstone = { lat: 44.42, lng: -110.59 };
+      var centerUS = {
+        lat: 39.8283,
+        lng: -98.58
+      }
+      var chicago = {
+        lat: 41.87,
+        lng: -87.6298
+      };
+      var yellowstone = {
+        lat: 44.42,
+        lng: -110.59
+      };
+      var minneapolis = {
+        lat: 44.98,
+        lng: -93.26
+      }
+      var fargo = {
+        lat: 46.88,
+        lng: -96.79
+      };
+      var denver = {
+        lat: 39.66,
+        lng: -105.20
+      };
+      var rushmore = {
+        lat: 43.8791,
+        lng: -103.4591
+      }
 
-      var uluru = { lat: 37.0902, lng: -95.71294 };
       var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 4,
-        center: uluru
+        center: centerUS,
+        //gestureHandling: 'none',
+        zoomControl: false
       });
 
+      //Content Strings Containing Images and Caption
       var contentString = '<div id="content">' +
         '<div id="siteNotice">' +
         '</div>' +
-        '<h1 id="firstHeading" class="firstHeading">Uluru</h1>' +
+        '<h1 id="firstHeading" class="firstHeading">Chicago, IL</h1>' +
         '<div id="bodyContent">' +
-        '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
-        'sandstone rock formation in the southern part of the ' +
-        'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) ' +
-        'south west of the nearest large town, Alice Springs; 450&#160;km ' +
-        '(280&#160;mi) by road. Kata Tjuta and Uluru are the two major ' +
-        'features of the Uluru - Kata Tjuta National Park. Uluru is ' +
-        'sacred to the Pitjantjatjara and Yankunytjatjara, the ' +
-        'Aboriginal people of the area. It has many springs, waterholes, ' +
-        'rock caves and ancient paintings. Uluru is listed as a World ' +
-        'Heritage Site.</p>' +
-        '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">' +
-        'https://en.wikipedia.org/w/index.php?title=Uluru</a> ' +
-        '(last visited June 22, 2009).</p>' +
-        '</div>' +
-        '</div>';
+        '<img id="yellowstoneMap" class="img-fluid" src="img/banner.jpg">' +
+        '</div>'
 
       var contentString2 = '<div id="content">' +
         '<div id="siteNotice">' +
@@ -408,9 +465,56 @@
         '<img id="yellowstoneMap" class="img-fluid" src="img/IMG_0334.jpg">' +
         '</div>';
 
-      //Opens Info Window
-      var infowindow = new google.maps.InfoWindow({
+      var contentString3 = '<div id="content">' +
+        '<div id="siteNotice">' +
+        '</div>' +
+        '<h1 id="firstHeading" class="firstHeading">Minneapolis, MN</h1>' +
+        '<div id="bodyContent">' +
+        '<img id="yellowstoneMap" class="img-fluid" src="img/IMG_0070.jpg">' +
+        '</div>';
+
+      var contentString4 = '<div id="content">' +
+        '<div id="siteNotice">' +
+        '</div>' +
+        '<h1 id="firstHeading" class="firstHeading">Fargo, ND</h1>' +
+        '<div id="bodyContent">' +
+        '<img id="yellowstoneMap" class="img-fluid" src="img/IMG_0107.jpg">' +
+        '</div>';
+
+      var contentString5 = '<div id="content">' +
+        '<div id="siteNotice">' +
+        '</div>' +
+        '<h1 id="firstHeading" class="firstHeading">Red Rocks Amphitheater</h1>' +
+        '<div id="bodyContent">' +
+        '<img id="yellowstoneMap" class="img-fluid" src="img/IMG_0492.jpg">' +
+        '</div>';
+
+      var contentString6 = '<div id="content">' +
+        '<div id="siteNotice">' +
+        '</div>' +
+        '<h1 id="firstHeading" class="firstHeading">Mount Rushmore</h1>' +
+        '<div id="bodyContent">' +
+        '<img id="yellowstoneMap" class="img-fluid" src="img/IMG_0429.jpg">' +
+        '</div>';
+
+      //Location Specific Info Windows
+      var chicagoWindow = new google.maps.InfoWindow({
+        content: contentString,
+      });
+      var yellowstoneWindow = new google.maps.InfoWindow({
         content: contentString2,
+      });
+      var minneapolisWindow = new google.maps.InfoWindow({
+        content: contentString3,
+      });
+      var fargoWindow = new google.maps.InfoWindow({
+        content: contentString4,
+      });
+      var denverWindow = new google.maps.InfoWindow({
+        content: contentString5,
+      });
+      var rushmoreWindow = new google.maps.InfoWindow({
+        content: contentString6,
       });
 
       var marker = new google.maps.Marker({
@@ -421,15 +525,45 @@
         position: yellowstone,
         map: map
       });
+      var marker3 = new google.maps.Marker({
+        position: minneapolis,
+        map: map
+      });
+      var marker4 = new google.maps.Marker({
+        position: fargo,
+        map: map
+      });
+      var marker5 = new google.maps.Marker({
+        position: denver,
+        map: map
+      });
+      var marker6 = new google.maps.Marker({
+        position: rushmore,
+        map: map
+      });
+
       //Opens Marker Info Windows
       marker.addListener('click', function () {
-        infowindow.open(map, marker);
+        chicagoWindow.open(map, marker);
       });
       marker2.addListener('click', function () {
-        infowindow.open(map, marker);
+        yellowstoneWindow.open(map, marker);
+      });
+      marker3.addListener('click', function () {
+        minneapolisWindow.open(map, marker);
+      });
+      marker4.addListener('click', function () {
+        fargoWindow.open(map, marker);
+      });
+      marker5.addListener('click', function () {
+        denverWindow.open(map, marker);
+      });
+      marker6.addListener('click', function () {
+        rushmoreWindow.open(map, marker);
       });
     }
   </script>
+
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBG3uDD4arHX03QYhbQleffY4Z1SZN9JR8&callback=initMap"></script>
 
 </body>
